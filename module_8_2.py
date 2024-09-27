@@ -4,26 +4,23 @@ def personal_sum(numbers):
     result = 0
     incorrect_data = 0
     for i in numbers:
-        if isinstance(i, int | float):
+        try:
             result += i
-        else:
+        except:
             incorrect_data += 1
+            print(f'Некорректный тип данных для подсчёта суммы - {i}')
     return result, incorrect_data
 
 
 def calculate_average(numbers):
     try:
-        long = (len(numbers))
-    except:
+        itog = personal_sum(numbers)
+        return itog[0] / (len(numbers) - itog[1])
+    except TypeError:
         print('В numbers записан некорректный тип данных')
         return
-
-    itog = personal_sum(numbers)
-    try:
-        avr = itog[0] / (long - itog[1])
-    except:
+    except ZeroDivisionError:
         return 0
-    return avr
 
 
 print(f'Результат 1: {calculate_average("1, 2, 3")}')  # Строка перебирается, но каждый символ - строковый тип
